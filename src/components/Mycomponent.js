@@ -23,18 +23,22 @@ class MyComponent extends React.Component {
     render() {
         //DRY:don't repeat yourself
         return (
-            <div>
+            <>
+                <div className="a">
+                    <AddUserInfor
+                        handleAddNewUser={this.handleAddNewUser}
 
-                <AddUserInfor
-                    handleAddNewUser={this.handleAddNewUser}
+                    />
+                    <br /><br />
+                    <DisplayInfor
+                        listUsers={this.state.listUsers}
+                    />
+                </div >
 
-                />
-                <br /><br />
-                <DisplayInfor
-                    listUsers={this.state.listUsers}
-                />
+                <div className="b">
 
-            </div>
+                </div>
+            </>
         );
 
     }
