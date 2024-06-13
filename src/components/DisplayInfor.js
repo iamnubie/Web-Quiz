@@ -16,9 +16,11 @@ class DisplayInfor extends React.Component {
         //destructuring array
         const { listUsers } = this.props;//object
         //props => viet tat properties
+
+        //template + logic js
         return (
             <div className='display-infor-container'>
-                <img src={logo} />
+                {/* <img src={logo} /> */}
                 <div>
                     <span onClick={() => { this.handleShowHide() }}>
                         {this.state.isShowListUser === true ? "Hide list users:" : "Show list users:"}
@@ -29,8 +31,13 @@ class DisplayInfor extends React.Component {
                         {listUsers.map((user, index) => {
                             return (
                                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-                                    <div style={{ color: 'blueviolet', paddingTop: '50px' }}>My name is {user.name}</div>
-                                    <div>My age is {user.age}</div>
+                                    <div>
+                                        <div style={{ color: 'blueviolet' }}>My name is {user.name}</div>
+                                        <div>My age is {user.age}</div>
+                                    </div>
+                                    <div>
+                                        <button onClick={() => this.props.handleDeleteUser(user.id)}>Delete</button>
+                                    </div>
                                     <hr />
                                 </div>
                             )
