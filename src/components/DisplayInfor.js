@@ -1,43 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './DisplayInfor.scss';
 import logo from './../logo.svg';
 
 //stateless vs stateful
-// class DisplayInfor extends React.Component {
-
-//     render() {
-//         console.log('>>>call me render')
-//         //destructuring array
-//         const { listUsers } = this.props;//object
-//         //props => viet tat properties
-
-//         //template + logic js
-//         return (
-//             <div className='display-infor-container'>
-
-//                 {true &&
-//                     <div>
-//                         {listUsers.map((user, index) => {
-//                             return (
-//                                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-//                                     <div>
-//                                         <div style={{ color: 'blueviolet' }}>My name is {user.name}</div>
-//                                         <div>My age is {user.age}</div>
-//                                     </div>
-//                                     <div>
-//                                         <button onClick={() => this.props.handleDeleteUser(user.id)}>Delete</button>
-//                                     </div>
-//                                     <hr />
-//                                 </div>
-//                             )
-
-//                         })}
-//                     </div>
-//                 }
-//             </div>
-//         )
-//     }
-// }
 
 const DisplayInfor = (props) => {
     const { listUsers } = props;//object
@@ -46,6 +11,15 @@ const DisplayInfor = (props) => {
     const handleShowHideListUser = () => {
         setShowHideListUser(!isShowHideListUser);
     }
+    console.log('>>>call me render')
+    useEffect(
+        () => {
+            if (listUsers.length === 0) {
+                alert('You deleted all the users')
+            }
+            console.log('>>>call me useEffect')
+        }, [listUsers]
+    );
     return (
         <div className='display-infor-container'>
             <div>
