@@ -8,6 +8,15 @@ const HomePage = (props) => {
                     type="video/mp4"
                 />
             </video>
+            <div className='homepage-content'>
+                <div className='title-1'>There's a best way to ask</div>
+                <div className='title-2'>You don't want to make boring form.
+                    And your audience won't anwer one.
+                    Create a typeform instead-and make everyone happy.</div>
+                <div className='title-3'>
+                    <button >Get's started. It's free.</button>
+                </div>
+            </div>
         </div>
     )
 }
