@@ -1,5 +1,6 @@
 import axios from '../utils/axiosCustomize';
 
+
 const postCreateNewUser = (email, password, username, role, image) => {
     //submit data
     const data = new FormData();
@@ -10,4 +11,8 @@ const postCreateNewUser = (email, password, username, role, image) => {
     data.append('userImage', image);
     return axios.post('api/v1/participant', data);
 }
-export { postCreateNewUser }
+const getAllUsers = () => {
+    return axios.get('api/v1/participant/all');
+}
+
+export { postCreateNewUser, getAllUsers }
