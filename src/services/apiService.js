@@ -1,3 +1,4 @@
+import { delay } from 'lodash';
 import axios from '../utils/axiosCustomize';
 
 
@@ -33,7 +34,12 @@ const getUserWithPaginate = (page, limit) => {
 
 const postLogin = (userEmail, userPassword) => {
     return axios.post(`/api/v1/login`,
-        { email: userEmail, password: userPassword }
+        {
+            email: userEmail,
+            password: userPassword,
+            delay: 3000
+
+        }
     );
 }
 const postRegister = (email, password, username) => {

@@ -5,6 +5,8 @@ import { postLogin } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
+// import { CgSearchLoading } from "react-icons/cg";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const Login = (props) => {
 
@@ -12,6 +14,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [isLoading, setIsLoading] = useState(false);
 
     const validateEmail = (email) => {
         return String(email)
@@ -32,16 +35,18 @@ const Login = (props) => {
             toast.error('Invalid password')
             return;
         }
-
+        setIsLoading(true);
         //submit api
         let data = await postLogin(email, password)
         if (data && data.EC === 0) {
             dispatch(doLogin(data))
             toast.success(data.EM);
+            setIsLoading(false);
             navigate('/')
         }
         if (data && +data.EC !== 0) {
             toast.error(data.EM);
+            setIsLoading(false);
         }
     }
     return (
@@ -80,7 +85,12 @@ const Login = (props) => {
                     <button
                         className='btn-submit'
                         onClick={() => handleLogin()}
-                    >Login to Quizz test</button>
+                        disabled={isLoading}
+                    >
+                        {/* <CgSearchLoading className='loader-icon' /> */}
+                        {isLoading === true && <CgSpinnerTwo className='loader-icon' />}
+                        <span>Login to Quizz test</span>
+                    </button>
                 </div>
                 <div className='text-center'>
                     <span className='back' onClick={() => { navigate('/') }}>
