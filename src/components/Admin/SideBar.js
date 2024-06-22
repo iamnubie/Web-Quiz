@@ -40,8 +40,8 @@ const SideBar = (props) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        <DiReact size={'3em'} color={"00bfff"} />
-                        <span >Hoi Dan IT</span>
+                        <DiReact className='loader-icon2' size={'3em'} color={"00bfff"} />
+                        <span >Group Trio</span>
                     </div>
                 </SidebarHeader>
 
@@ -78,13 +78,13 @@ const SideBar = (props) => {
                         }}
                     >
                         <a
-                            href="https://haryphamdev.github.io/hoidanit-udemy/"
+                            href="https://github.com/iamnubie/myfirst-react/"
                             target="_blank"
                             className="sidebar-btn"
                             rel="noopener noreferrer"
                         >
                             <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                                &#169; Hỏi Dân IT Udemy
+                                &#169; Source Code
                             </span>
                         </a>
                     </div>

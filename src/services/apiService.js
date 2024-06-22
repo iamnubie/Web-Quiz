@@ -1,7 +1,6 @@
 import { delay } from 'lodash';
 import axios from '../utils/axiosCustomize';
 
-
 const postCreateNewUser = (email, password, username, role, image) => {
     //submit data
     const data = new FormData();
@@ -47,7 +46,11 @@ const postRegister = (email, password, username) => {
         { email, password, username }
     );
 }
+const getQuizByUser = () => {
+    return axios.get('/api/v1/quiz-by-participant');
+}
 export {
     postCreateNewUser, getAllUsers,
-    putUpdateUser, deleteUser, getUserWithPaginate, postLogin, postRegister
+    putUpdateUser, deleteUser, getUserWithPaginate,
+    postLogin, postRegister, getQuizByUser
 }
