@@ -42,7 +42,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact className='loader-icon2' size={'3em'} color={"00bfff"} />
-                        <span onClick={() => navigate('/')}>Group Trio</span>
+                        <span onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Group Trio</span>
                     </div>
                 </SidebarHeader>
 
