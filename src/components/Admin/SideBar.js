@@ -14,9 +14,10 @@ import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
 import './SideBar.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SideBar = (props) => {
+    const navigate = useNavigate();
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
         <>
@@ -41,7 +42,7 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact className='loader-icon2' size={'3em'} color={"00bfff"} />
-                        <span >Group Trio</span>
+                        <span onClick={() => navigate('/')}>Group Trio</span>
                     </div>
                 </SidebarHeader>
 
@@ -63,7 +64,10 @@ const SideBar = (props) => {
                                 Quản lý Users
                                 <Link to="/admins/manage-users" />
                             </MenuItem>
-                            <MenuItem > Quản lý Bài Quiz</MenuItem>
+                            <MenuItem > Quản lý Bài Quiz
+                                <Link to="/admins/manage-quizzes" />
+
+                            </MenuItem>
                             <MenuItem> Quản lý Câu Hỏi</MenuItem>
                         </SubMenu>
 
