@@ -71,8 +71,8 @@ const ManageUser = (props) => {
             </div>
             <div className="users-content">
                 <div className="btn-add-new">
-                    <button className="btn btn-primary" onClick={() => setShowModalCreateUser(true)}>
-                        <FcPlus />Add new users
+                    <button className="btn btn-primary d-flex align-items-center" onClick={() => setShowModalCreateUser(true)}>
+                        <FcPlus className="me-2" />Add new users
                     </button>
                 </div>
                 <div className="table-users-container">
