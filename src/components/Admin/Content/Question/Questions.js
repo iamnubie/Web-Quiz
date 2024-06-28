@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import './Questions.scss';
 import { IoCreateOutline } from "react-icons/io5";
@@ -9,15 +9,11 @@ import { RiImageAddFill } from "react-icons/ri";
 import { v4 as uuidv4 } from 'uuid';
 import _ from 'lodash';
 import Lightbox from 'react-awesome-lightbox';
+import { getAllQuizForAdmin, postCreateNewQuestionForQuiz, postCreateNewAnswerForQuestion } from "../../../../services/apiService";
+
 
 const Questions = (props) => {
-    const options = [
-        { value: 'EASY', label: 'EASY' },
-        { value: 'MEDIUM', label: 'MEDIUM' },
-        { value: 'HARD', label: 'HARD' },
-        { value: 'ASIAN', label: 'ASIAN' },
-    ];
-    const [selectedQuiz, setSelectedQuiz] = useState({});
+
     const [questions, setQuestions] = useState(
         [
             {
@@ -42,6 +38,26 @@ const Questions = (props) => {
             url: ''
         }
     )
+    const [listQuiz, setListQuiz] = useState([]);
+    const [selectedQuiz, setSelectedQuiz] = useState({});
+
+    useEffect(() => {
+        fetchQuiz();
+    }, [])
+
+    const fetchQuiz = async () => {
+        let res = await getAllQuizForAdmin();
+        if (res && res.EC === 0) {
+            let newQuiz = res.DT.map(item => {
+                return {
+                    value: item.id,
+                    label: `${item.id} - ${item.description}`
+                }
+            })
+            setListQuiz(newQuiz)
+        }
+    }
+
     const handleAddRemoveQuestion = (type, id) => {
         if (type === 'ADD') {
             const newQuestion = {
@@ -125,8 +141,21 @@ const Questions = (props) => {
             setQuestions(questionsClone);
         }
     }
-    const handleSubmitQuestionForQuiz = () => {
-        console.log('question: ', questions)
+    const handleSubmitQuestionForQuiz = async () => {
+        //validate data
+
+        //submit questions
+        await Promise.all(questions.map(async (question) => {
+            const q = await postCreateNewQuestionForQuiz(
+                +selectedQuiz.value,
+                question.description,
+                question.imageFile);
+            //submit answers
+            await Promise.all(question.answers.map(async (answer) => {
+                await postCreateNewAnswerForQuestion(
+                    answer.description, answer.isCorrect, q.DT.id)
+            }))
+        }));
     }
     const handlePreviewImage = (questionId) => {
         let questionsClone = _.cloneDeep(questions);
@@ -151,10 +180,10 @@ const Questions = (props) => {
                     <Select
                         defaultValue={selectedQuiz}
                         onChange={setSelectedQuiz}
-                        options={options}
+                        options={listQuiz}
+                        styles={{ zIndex: 1000 }}
                     />
                 </div>
-
                 <div className='mt-3 mb-2'>
                     Add questions:
                 </div>
@@ -166,9 +195,9 @@ const Questions = (props) => {
                                 <div className='questions-content'>
                                     <div className="form-floating description">
                                         <input
-                                            type="text"
+                                            type="type"
                                             className="form-control"
-                                            placeholder='your quiz name'
+                                            placeholder='name@example.com'
                                             value={question.description}
                                             onChange={(event) => handleOnChangeQuestion('QUESTION', question.id, event.target.value)}
                                         />
@@ -217,9 +246,9 @@ const Questions = (props) => {
                                                 <div className="form-floating answer-name">
                                                     <input
                                                         value={answer.description}
-                                                        type="text"
+                                                        type="type"
                                                         className="form-control"
-                                                        placeholder='your quiz name'
+                                                        placeholder='name@example.com'
                                                         onChange={(event) =>
                                                             handleAnswerQuestion('INPUT', answer.id, question.id, event.target.value)}
                                                     />
