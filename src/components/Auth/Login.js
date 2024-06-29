@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
 // import { CgSearchLoading } from "react-icons/cg";
 import { CgSpinnerTwo } from "react-icons/cg";
+import Language from '../Header/Language';
 
 const Login = (props) => {
 
@@ -59,6 +60,7 @@ const Login = (props) => {
             <div className='header'>
                 <span>Don't have an account yet?</span>
                 <button onClick={() => navigate('/register')}>Sign up</button>
+                <Language />
             </div>
             <div className='title col-4 mx-auto'>
                 Quizz test &amp; Us
