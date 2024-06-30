@@ -24,9 +24,13 @@ const HomePage = (props) => {
                 </div>
                 <div className='title-3'>
                     {isAuthenticated === false ?
-                        <button onClick={() => navigate('./login')}>Get's started. It's free.</button>
+                        <button onClick={() => navigate('/login')}>
+                            {t('homepage.title3.login')}
+                        </button>
                         :
-                        <button onClick={() => navigate('./users')}>Doing Quiz Now</button>
+                        <button onClick={() => navigate('/users')}>
+                            {t('homepage.title3.doing')}
+                        </button>
                     }
                 </div>
             </div>
