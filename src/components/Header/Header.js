@@ -41,7 +41,7 @@ const Header = () => {
             <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     {/* <Navbar.Brand href="#home">Honkai Star Rail</Navbar.Brand> */}
-                    <NavLink to='/' className='navbar-brand'>Honkai Star Rail</NavLink>
+                    <NavLink to='/' className='navbar-brand'>Group 5</NavLink>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
